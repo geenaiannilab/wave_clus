@@ -1,8 +1,8 @@
 function par = set_parameters()
 
 % LOAD PARAMS
-par.segments_length = 5;             % length (in minutes) of segments in which the data is cutted (default 5min).
-par.sr = 30000;                      % sampling rate (in Hz). This parameter will be only used if the data file don't have a sr.
+par.segments_length = 15;%5;             % length (in minutes) of segments in which the data is cutted (default 5min).
+par.sr = 24414;%30000;                      % sampling rate (in Hz). This parameter will be only used if the data file don't have a sr.
 
 
 % PLOTTING PARAMETERS
@@ -21,7 +21,7 @@ par.maxtemp = 0.251;                 % maximum temperature for SPC
 par.tempstep = 0.01;                 % temperature steps
 par.SWCycles = 100;                  % SPC iterations for each temperature (default 100)
 par.KNearNeighb = 11;                % number of nearest neighbors for SPC
-par.min_clus = 20;                   % minimum size of a cluster (default 20)
+par.min_clus = 100; %20                   % minimum size of a cluster (default 20)
 par.randomseed = 0;                  % if 0, random seed is taken as the clock value (default 0)
 %par.randomseed = 147;               % If not 0, random seed
 %par.temp_plot = 'lin';              % temperature plot in linear scale
@@ -34,20 +34,20 @@ par.elbow_min  = 0.4;                %Thr_border parameter for regime border det
 par.tmax = 'all';                    % maximum time to load
 %par.tmax= 180;                      % maximum time to load (in sec)
 par.tmin= 0;                         % starting time for loading (in sec)
-par.w_pre = 20;                      % number of pre-event data points stored (default 20)
-par.w_post = 44;                     % number of post-event data points stored (default 44))
+par.w_pre = 12;                      % number of pre-event data points stored (default 20)
+par.w_post = 20;                     % number of post-event data points stored (default 44))
 par.alignment_window = 10;           % number of points around the sample expected to be the maximum
-par.stdmin = 5;                      % minimum threshold for detection
+par.stdmin = 5.5;                      % minimum threshold for detection
 par.stdmax = 50;                     % maximum threshold for detection
 par.detect_fmin = 300;               % high pass filter for detection
-par.detect_fmax = 3000;              % low pass filter for detection (default 3000)
+par.detect_fmax = 5000;              % low pass filter for detection (default 3000)
 par.detect_order = 4;                % filter order for detection. 0 to disable the filter.
 par.sort_fmin = 300;                 % high pass filter for sorting
-par.sort_fmax = 3000;                % low pass filter for sorting (default 3000)
+par.sort_fmax = 5000;                % low pass filter for sorting (default 3000)
 par.sort_order = 2;                  % filter order for sorting. 0 to disable the filter.
 par.ref_ms = 1.5;                    % detector dead time, minimum refractory period (in ms)
-par.detection = 'pos';               % type of threshold ('pos','neg','both')
-% par.detection = 'neg';
+%par.detection = 'pos';               % type of threshold ('pos','neg','both')
+par.detection = 'neg';
 % par.detection = 'both';
 
 % INTERPOLATION PARAMETERS

@@ -1,3 +1,4 @@
+
 function Get_spikes(input, varargin)
 
 % PROGRAM Get_spikes.
@@ -198,15 +199,28 @@ function get_spikes_single(filename, par_input)
     if current_par.cont_segment && data_handler.with_raw
         [psegment, sr_psegment] = data_handler.get_signal_sample();
         try
-			save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold')
-		catch
-			save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold','-v7.3')
-		end
+		%	save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold')
+            %outDir = extractBefore(filename, 'cleanSpikes');
+            outDir = extractBefore(filename, 'Spikes');
+            save([outDir 'Wave_Clus\' data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold')
+
+        catch
+			%save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold','-v7.3')
+            outDir = extractBefore(filename, 'cleanSpikes');
+            %outDir = extractBefore(filename, 'Spikes');
+            save([outDir 'Wave_Clus\' data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','psegment','sr_psegment','threshold','-v7.3')
+        end
     else
 		try
-			save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par')
+			%save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par')
+            %outDir = extractBefore(filename, 'cleanSpikes');
+            outDir = extractBefore(filename, 'Spikes');
+            save([outDir 'Wave_Clus\' data_handler.nick_name '_spikes'], 'spikes', 'index', 'par')
 		catch
-			save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','-v7.3')
+			%save([data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','-v7.3')
+            %outDir = extractBefore(filename, 'cleanSpikes');
+            outDir = extractBefore(filename, 'Spikes');
+            save([outDir 'Wave_Clus\' data_handler.nick_name '_spikes'], 'spikes', 'index', 'par','-v7.3')
 		end
     end
 

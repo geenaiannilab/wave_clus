@@ -32,9 +32,16 @@ classdef mat_wc_reader < handle
             if ismember('spikes',{finfo.name}) && ismember('index',{finfo.name})
                obj.spikes_file = true;
             end
-            if isfield(par,'tmax') && ismember('data',{finfo.name})
-                
-                data_info = whos('-file',raw_filename,'data');
+          %  if isfield(par,'tmax') && ismember('data',{finfo.name}) %GI changed
+             if isfield(par,'tmax') && ismember('SPdat',{finfo.name})
+                 
+                %data_info = whos('-file',raw_filename,'data'); %GI change
+                data_info = whos('-file',raw_filename,'SPdat');
+                %%%
+                tmp = matfile(raw_filename)   %GI changes 
+                tmp = tmp.SPdat;
+                data_info.size = size(tmp.data);
+                %%%
                 obj.min_index = floor(par.tmin * obj.sr);
                 if strcmp(par.tmax,'all')
                     obj.max_index = max(data_info.size);
@@ -88,7 +95,10 @@ classdef mat_wc_reader < handle
       
         function x = get_segment(obj,i)
             
-            load(obj.raw_filename,'data');
+            %load(obj.raw_filename,'data'); GI changes
+            load(obj.raw_filename,'SPdat');
+            data = SPdat.data;
+            clear SPdat;
             
             if i ~= obj.max_segments
                 x = data(obj.min_index+obj.segmentLength*(i-1)+1 : obj.min_index+obj.segmentLength*i);
